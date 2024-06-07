@@ -45,7 +45,7 @@ variable "course" {
 variable "courses" {
   default = [
     "Devops",
-    "Devops",
+    "Navien",
     "python",
   ]
 }
