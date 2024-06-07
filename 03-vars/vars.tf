@@ -87,8 +87,7 @@ output "env" {
 variable "url" {}
 
 output "url" {
-  value = var.url
-
+  value = var.urlw
 }
 
 
