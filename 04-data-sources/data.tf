@@ -26,9 +26,10 @@ output "sgid" {
 }
 
 data "aws_ami" "example" {
-   most_recent      = true
+  owners           = ["968585591903"]
+  most_recent     = true
   name_regex       = "Centos-8-DevOps-Practice"
-  owners           = [968585591903]
+
 }
 
 output "ami" {
