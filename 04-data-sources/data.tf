@@ -31,3 +31,7 @@ data "aws_ami" "example" {
   name_regex       = "Centos-8-DevOps-Practice"
   owners           = ["self"]
 }
+
+output "ami" {
+  value = data.aws_ami.example.id
+}
