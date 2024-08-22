@@ -6,6 +6,7 @@ variable "sample1" {
   default = "Hello, world"
 }
 
+# You declare the variable and if you need the output we should give like variable.sample so here below
 output "sample" {
   value = var.sample
 }
@@ -14,7 +15,8 @@ output "sample1" {
   value = var.sample1
 }
 
-# sometimes if variable/any reference with the combination of some other string then we have to access those in ${}
+# sometimes if variable/any reference with the combination of some other string then
+#  we have to access those in ${}
 
 output "sample-txt" {
   value = "Value of sample and sample1- ${var.sample} - ${var.sample1}"
