@@ -19,7 +19,7 @@ output "sample1" {
 #  we have to access those in ${}
 
 output "sample-txt" {
-  value = "Value of sample and sample1- ${var.sample} - ${var.sample1}"
+  value = "Value of sample and sample1- ${var.sample} - ${var.sample1}"  # String + variable
 
 }
 
@@ -71,14 +71,22 @@ variable "courses_details" {
     }
     }
   }
-
+# list starts with a index value
 output "courses" {
   value = var.courses[1]
 }
 
+# If i need details of a particular course i will mention Aws or Devops.
 output "course_details" {
   value = var.courses_details["Aws"]
 }
+
+# In Map to retrieve the details
+output "course_timing" {
+  value = var.courses_details["Aws"]["timings"]
+}
+
+
 
 variable "env" {}
 
