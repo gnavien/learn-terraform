@@ -11,7 +11,7 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [aws_security_group.sg.id] # list of security groups
 
   tags = {
-    Name = "sample"  # Instance Name is called Sample
+    Name = var.name  # Instance Name is called Sample
   }
 }
 
@@ -24,7 +24,7 @@ data "aws_ami" "example" {
 
 
 resource "aws_security_group" "sg" {
-  name        = "sample"
+  name        = var.name
   description = "Allow TLS inbound traffic"
 
 }
@@ -44,5 +44,7 @@ resource "aws_security_group" "sg" {
   cidr_blocks = ["0.0.0.0/0"]
 }
   tags = {
-    Name = "sample"
+    Name = var.name
   }
+
+variable "name" {}
