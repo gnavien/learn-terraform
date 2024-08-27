@@ -3,7 +3,8 @@ provider "aws" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
-# The below code will launch a new instance with a security group
+# The below code will launch a new instance with a security group and in the module we have mentioned only one instance
+
 
 resource "aws_instance" "web" {
   ami           = data.aws_ami.example.id

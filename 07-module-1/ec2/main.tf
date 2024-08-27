@@ -11,7 +11,7 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [aws_security_group.sg.id] # list of security groups
 
   tags = {
-    Name = var.name  # Instance Name is called Sample
+    Name = var.name  # Instance Name is called Sample we have the variable in the main.tf file
   }
 }
 
@@ -48,3 +48,9 @@ resource "aws_security_group" "sg" {
   }
 
 variable "name" {}
+
+# Now i wanted to print the public IP of the EC2 instance and below is the code.
+
+output "public_ip" {
+  value = aws_instance.web.public_ip
+}
