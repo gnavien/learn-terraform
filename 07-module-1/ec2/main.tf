@@ -51,7 +51,7 @@ variable "name" {}
 
 # Now i wanted to print the public IP of the EC2 instance and below is the code.
 # Here the below code is correct but the output is sent to the root module main.tf. We have to go to the
-# the root module main.tf in output "public_ip_sample1"
+# the root module main.tf in output "public_ip_sample1" & "public_ip_sample2"
 
 output "public_ip" {
   value = aws_instance.web.public_ip
