@@ -31,6 +31,10 @@ output "devops_topics"{
   value = var.classes["devops"]["members"]
 }
 
+output "aws_topics" {
+  value = lookup(lookup(var.classes, "aws", null), "members", "no members" )
+}
+
 # Print the fruits in reverse order
 output "reversed_fruits" {
   value = [for fruit in var.fruits : fruit] | reverse
