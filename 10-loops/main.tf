@@ -20,7 +20,8 @@ resource "aws_instance" "web" {
   instance_type = "t3.micro"
 
   tags = {
-    name = var.instances[count.index]
+    #name = var.instances[count.index]
+    name = element(var.instances, count.index ) # element will pick from
   }
 }
 data "aws_ami" "example" {
