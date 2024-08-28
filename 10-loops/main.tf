@@ -5,6 +5,7 @@ provider "aws" {
 resource "aws_instance" "web" {
   ami           = data.aws_ami.example.id
   # count=3  # we will have 3 instances created
+  count = length(var.instances)
   instance_type = "t3.micro"
 
   tags = {
@@ -17,4 +18,8 @@ data "aws_ami" "example" {
   most_recent      = true
   name_regex       = "Centos-8-DevOps-Practice"
 
+}
+
+variable "instances" {
+  default = ["frontend", "catalogue", "cart"]
 }
