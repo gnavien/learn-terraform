@@ -14,14 +14,13 @@ provider "aws" {
 #}
 
 resource "aws_instance" "web" {
-  count = length(var.instances)
-
+  for_each = var.instances
   ami           = data.aws_ami.example.id
   instance_type = "t3.micro"
 
   tags = {
     #name = var.instances[count.index]
-    name = element(var.instances, count.index ) # element will pick from
+    name = each.key # Here key is frontend, catalogue, cart
   }
 }
 data "aws_ami" "example" {
@@ -31,6 +30,23 @@ data "aws_ami" "example" {
 
 }
 
+#variable "instances" {
+#  default = ["frontend", "catalogue", "cart"]
+#}
+
 variable "instances" {
-  default = ["frontend", "catalogue", "cart"]
+   default = {
+    frontend = {
+      name          = "frontend"
+      instance_type = "t3.micro"
+    }
+    catalogue  = {
+      name          = "catalogue"
+      instance_type = "t3.nano"
+    }
+    cart = {
+      name          = "cart"
+      instance_type = "t3.nano"
+    }
+  }
 }
