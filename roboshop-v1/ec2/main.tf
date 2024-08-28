@@ -15,20 +15,26 @@ resource "aws_instance" "web" {
   }
 }
 
-provisioner "remote-exec" {
+# As we wanted to move the remote execution out of the instance block, so it will not fail if something goes wrong in ansible
 
-  connection {
-    type     = "ssh"
-    user     = "centos"
-    password = "DevOps321"
-    host     = self.public_ip
+
+resource "null_resource" "ansible" {
+  depends_on = [aws_instance.web,aws_route53_record.www] # We have written this once ec2 instances and route 53 records have been created we need to start the remote execution.
+  provisioner "remote-exec" {
+
+    connection {
+      type     = "ssh"
+      user     = "centos"
+      password = "DevOps321"
+      host     = aws_instance.web.public_ip
+    }
+
+
+    inline = [
+      "sudo labauto ansible",
+      "ansible-pull -i localhost, -U https://github.com/gnavien/roboshop-ansible.git main.yml -e env=dev -e role_name=${var.name}"
+    ]
   }
-
-
-  inline = [
-    "sudo labauto ansible",
-    "ansible-pull -i localhost, -U https://github.com/gnavien/roboshop-ansible.git main.yml -e env=dev -e role_name=${var.name}"
-  ]
 }
 # We need to have DNS records to be created for all the ec2 instances
 resource "aws_route53_record" "www" {
