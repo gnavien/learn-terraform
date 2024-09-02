@@ -52,28 +52,52 @@ data "aws_ami" "example" {
 
 }
 
-
 resource "aws_security_group" "sg" {
   name        = var.name
   description = "Allow TLS inbound traffic"
 
-}
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
- ingress {
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"  # -1 opens all the ports
-      cidr_blocks = ["0.0.0.0/0"]
-    }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
- egress {
-  from_port   = 0
-  to_port     = 0
-  protocol    = "-1"
-  cidr_blocks = ["0.0.0.0/0"]
-}
   tags = {
     Name = var.name
   }
+}
+
+variable "name" {}
+
+#resource "aws_security_group" "sg" {
+#  name        = var.name
+#  description = "Allow TLS inbound traffic"
+#
+#}
+#
+#ingress {
+#      from_port   = 0
+#      to_port     = 0
+#      protocol    = "-1"  # -1 opens all the ports
+#      cidr_blocks = ["0.0.0.0/0"]
+#    }
+#
+#egress {
+#  from_port   = 0
+#  to_port     = 0
+#  protocol    = "-1"
+#  cidr_blocks = ["0.0.0.0/0"]
+#}
+#  tags = {
+#    Name = var.name
+#  }
 
 variable "name" {}
