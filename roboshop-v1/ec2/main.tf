@@ -42,7 +42,7 @@ resource "aws_route53_record" "www" {
   name    = "${var.name}-dev"
   type    = "A"
   ttl     = 30
-  records = [aws_instance.web.private_ip]v # We are accessing all the ec2 instances using the private IP address
+  records = [aws_instance.web.private_ip]# We are accessing all the ec2 instances using the private IP address
 }
 
 data "aws_ami" "example" {
