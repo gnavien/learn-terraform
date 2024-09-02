@@ -100,4 +100,3 @@ variable "name" {}
 #    Name = var.name
 #  }
 
-variable "name" {}
